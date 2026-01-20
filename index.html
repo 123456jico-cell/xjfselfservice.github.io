@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>郗镜霏智能生活服务中心(邯郸版)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        :root {
+            --primary: #4361ee;
+            --primary-light: #4895ef;
+            --secondary: #3f37c9;
+            --accent: #f72585;
+            --accent-light: #ff70a6;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --success: #4cc9f0;
+            --success-bg: #e3f2fd;
+            --border-radius: 12px;
+            --box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            background-color: #f5f7ff;
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 40px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 24px 0;
+            text-align: center;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin-bottom: 40px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        
+        .logo i {
+            font-size: 32px;
+            color: var(--accent-light);
+        }
+        
+        h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+        }
+        
+        .tagline {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            text-align: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-light);
+        }
+        
+        .service-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            font-size: 42px;
+            color: white;
+        }
+        
+        .food-icon {
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+        }
+        
+        .car-icon {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        }
+        
+        .service-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--dark);
+        }
+        
+        .service-desc {
+            color: var(--gray);
+            margin-bottom: 24px;
+            font-size: 1.05rem;
+        }
+        
+        .btn {
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary);
+            transform: scale(1.05);
+        }
+        
+        .btn-secondary {
+            background-color: var(--light-gray);
+            color: var(--dark);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #d8d9da;
+        }
+        
+        /* 预约记录部分 */
+        .reservations-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+            margin-top: 20px;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            color: var(--primary);
+        }
+        
+        .reservations-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .reservation-card {
+            background-color: var(--light);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            position: relative;
+        }
+        
+        .food-reservation {
+            border-left: 5px solid var(--accent);
+        }
+        
+        .car-reservation {
+            border-left: 5px solid var(--primary);
+        }
+        
+        .reservation-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        
+        .reservation-type {
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .food-type {
+            background-color: #fce4ec;
+            color: var(--accent);
+        }
+        
+        .car-type {
+            background-color: #e3f2fd;
+            color: var(--primary);
+        }
+        
+        .vehicle-type {
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .vehicle-electric {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .vehicle-car {
+            background-color: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        .reservation-time {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .reservation-details {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .route {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+        
+        .route i {
+            color: var(--primary);
+        }
+        
+        .location {
+            font-size: 1.1rem;
+            color: var(--dark);
+        }
+        
+        /* 删除按钮样式 - 修改为右下角 */
+        .delete-btn {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            padding: 5px;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .delete-btn:hover {
+            color: #dc3545;
+            background-color: rgba(220, 53, 69, 0.1);
+        }
+        
+        .no-reservations {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--gray);
+            font-size: 1.1rem;
+            grid-column: 1 / -1;
+        }
+        
+        .no-reservations i {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            color: var(--light-gray);
+        }
+        
+        /* 模态框样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: var(--border-radius);
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            animation: modalFadeIn 0.3s ease;
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .modal-header {
+            padding: 24px;
+            border-bottom: 1px solid var(--light-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--gray);
+            cursor: pointer;
+            line-height: 1;
+            transition: var(--transition);
+        }
+        
+        .close-modal:hover {
+            color: var(--dark);
+        }
+        
+        .modal-body {
+            padding: 24px;
+        }
+        
+        .option-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 576px) {
+            .option-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .option-card {
+            padding: 24px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid var(--light-gray);
+            background-color: white;
+        }
+        
+        .option-card:hover, .option-card.active {
+            border-color: var(--primary);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.1);
+        }
+        
+        .option-card.active {
+            background-color: rgba(67, 97, 238, 0.05);
+        }
+        
+        .option-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+        
+        .option-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .option-desc {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-top: 5px;
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #ced4da;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+        
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        /* 成功提示 */
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: var(--success-bg);
+            color: var(--success);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            margin: 0 auto 24px;
+        }
+        
+        .success-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--dark);
+        }
+        
+        .success-desc {
+            color: var(--gray);
+            margin-bottom: 30px;
+        }
+        
+        /* 删除确认弹窗 */
+        .confirm-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .confirm-content {
+            background-color: white;
+            border-radius: var(--border-radius);
+            width: 100%;
+            max-width: 400px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        
+        .confirm-icon {
+            font-size: 3rem;
+            color: #f8d7da;
+            margin-bottom: 20px;
+        }
+        
+        .confirm-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .confirm-message {
+            color: var(--gray);
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+        
+        .confirm-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .btn-cancel {
+            background-color: var(--light-gray);
+            color: var(--dark);
+        }
+        
+        .btn-cancel:hover {
+            background-color: #d8d9da;
+        }
+        
+        .btn-confirm {
+            background-color: #dc3545;
+            color: white;
+        }
+        
+        .btn-confirm:hover {
+            background-color: #c82333;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .app-version {
+            display: inline-block;
+            background-color: var(--light-gray);
+            padding: 4px 12px;
+            border-radius: 50px;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-home"></i>
+                <h1>郗镜霏智能生活服务中心(邯郸版)</h1>
+            </div>
+            <p class="tagline">一站式点餐与出行预约平台</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="main-content">
+            <!-- 点菜服务 -->
+            <div class="service-card" id="foodService">
+                <div class="service-icon food-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <h2 class="service-title">点菜服务</h2>
+                <p class="service-desc">选择自己做菜或外出就餐，美味生活随心选</p>
+                <button class="btn btn-primary" id="orderFoodBtn">
+                    <i class="fas fa-shopping-cart"></i> 开始点菜
+                </button>
+            </div>
+            
+            <!-- 用车预约 -->
+            <div class="service-card" id="carService">
+                <div class="service-icon car-icon">
+                    <i class="fas fa-car"></i>
+                </div>
+                <h2 class="service-title">用车预约</h2>
+                <p class="service-desc">预约电动车或汽车，轻松出行</p>
+                <button class="btn btn-primary" id="bookCarBtn">
+                    <i class="fas fa-calendar-alt"></i> 预约用车
+                </button>
+            </div>
+        </div>
+        
+        <!-- 点菜预约记录 -->
+        <div class="reservations-section">
+            <h2 class="section-title">
+                <i class="fas fa-utensils"></i> 点菜记录
+            </h2>
+            <div class="reservations-container" id="foodReservationsContainer">
+                <!-- 点菜记录将通过JavaScript动态添加 -->
+                <div class="no-reservations" id="noFoodReservations">
+                    <i class="fas fa-utensils"></i>
+                    <p>暂无点菜记录</p>
+                    <p>点击上方"开始点菜"按钮创建新的点菜记录</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 用车预约记录 -->
+        <div class="reservations-section">
+            <h2 class="section-title">
+                <i class="fas fa-car"></i> 用车预约记录
+            </h2>
+            <div class="reservations-container" id="carReservationsContainer">
+                <!-- 用车预约记录将通过JavaScript动态添加 -->
+                <div class="no-reservations" id="noCarReservations">
+                    <i class="fas fa-car"></i>
+                    <p>暂无用车预约记录</p>
+                    <p>点击上方"预约用车"按钮创建新的预约</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 点菜选择模态框 -->
+    <div class="modal" id="foodModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">选择点菜方式</h3>
+                <button class="close-modal" id="closeFoodModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="option-grid">
+                    <div class="option-card" id="cookAtHomeOption">
+                        <div class="option-icon" style="color: #f72585;">
+                            <i class="fas fa-utensil-spoon"></i>
+                        </div>
+                        <h4 class="option-title">自己做菜</h4>
+                        <p>选择食材和菜谱，在家烹饪美味</p>
+                    </div>
+                    
+                    <div class="option-card" id="eatOutOption">
+                        <div class="option-icon" style="color: #4361ee;">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <h4 class="option-title">外出就餐</h4>
+                        <p>选择餐厅，享受专业厨师的美味</p>
+                    </div>
+                </div>
+                
+                <!-- 自己做菜表单 -->
+                <div id="cookAtHomeForm" style="display: none;">
+                    <h4 style="margin-bottom: 20px;">选择您想做的菜</h4>
+                    <div class="form-group">
+                        <label class="form-label">菜谱选择</label>
+                        <select class="form-control" id="cookRecipeSelect">
+                            <option value="">-- 请选择菜谱 --</option>
+                            <option value="肉酱面">肉酱面</option>
+                            <option value="鸡蛋羹">鸡蛋羹</option>
+                            <option value="火鸡面">火鸡面</option>
+                            <option value="蒜薹炒肉">蒜薹炒肉</option>
+                            <option value="蘑菇炒肉">蘑菇炒肉</option>
+                            <option value="干锅花菜">干锅花菜</option>
+                            <option value="红烧肉">红烧肉</option>
+                            <option value="炒饭">炒饭</option>
+                            <option value="炸薯条">炸薯条</option>
+                            <option value="炸薯角">炸薯角</option>
+                            <option value="炸三角">炸三角</option>
+                            <option value="川香鸡柳">川香鸡柳</option>
+                            <option value="custom">自定义菜谱</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" id="customRecipeGroup" style="display: none;">
+                        <label class="form-label">自定义菜谱</label>
+                        <input type="text" class="form-control" id="customRecipe" placeholder="请输入您想做的菜">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">预计用餐时间</label>
+                        <input type="datetime-local" class="form-control" id="cookTime">
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-secondary" id="backToFoodOptions">
+                            <i class="fas fa-arrow-left"></i> 返回
+                        </button>
+                        <button class="btn btn-primary" id="submitCookOrder">
+                            <i class="fas fa-check"></i> 确认点菜
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 外出就餐表单 -->
+                <div id="eatOutForm" style="display: none;">
+                    <h4 style="margin-bottom: 20px;">选择餐厅</h4>
+                    <div class="form-group">
+                        <label class="form-label">餐厅选择</label>
+                        <select class="form-control" id="restaurantSelect">
+                            <option value="">-- 请选择餐厅 --</option>
+                            <option value="海底捞">海底捞</option>
+                            <option value="茅庐川菜">茅庐川菜</option>
+                            <option value="王氏牛肉汤">王氏牛肉汤</option>
+                            <option value="吕氏疙瘩汤">吕氏疙瘩汤</option>
+                            <option value="明洞">明洞</option>
+                            <option value="小猪小牛">小猪小牛</option>
+                            <option value="胖哥俩">胖哥俩</option>
+                            <option value="小菜园">小菜园</option>
+                            <option value="梅果">梅果</option>
+                            <option value="custom">自定义餐厅</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" id="customRestaurantGroup" style="display: none;">
+                        <label class="form-label">自定义餐厅</label>
+                        <input type="text" class="form-control" id="customRestaurant" placeholder="请输入餐厅名称">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">出行方式</label>
+                        <input type="text" class="form-control" id="transportation" placeholder="例如：步行、开车、打车等">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">预约时间</label>
+                        <input type="datetime-local" class="form-control" id="eatOutTime">
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-secondary" id="backToFoodOptions2">
+                            <i class="fas fa-arrow-left"></i> 返回
+                        </button>
+                        <button class="btn btn-primary" id="submitEatOutOrder">
+                            <i class="fas fa-check"></i> 确认预定
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="success-message" id="foodSuccessMessage">
+                    <div class="success-icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <h3 class="success-title">点菜成功！</h3>
+                    <p class="success-desc">您的点菜记录已保存</p>
+                    <button class="btn btn-primary" id="closeFoodSuccess">
+                        <i class="fas fa-home"></i> 返回首页
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 用车选择模态框 -->
+    <div class="modal" id="carModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">选择车辆类型</h3>
+                <button class="close-modal" id="closeCarModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="option-grid">
+                    <div class="option-card" id="electricOption">
+                        <div class="option-icon" style="color: #2e7d32;">
+                            <i class="fas fa-bicycle"></i>
+                        </div>
+                        <h4 class="option-title">电动车</h4>
+                        <p class="option-desc">哈达逮虾户</p>
+                    </div>
+                    
+                    <div class="option-card" id="carOption">
+                        <div class="option-icon" style="color: #1565c0;">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <h4 class="option-title">汽车</h4>
+                        <p class="option-desc">禁止向司机喧哗</p>
+                    </div>
+                </div>
+                
+                <div id="bookingForm" style="display: none;">
+                    <h4 id="bookingTitle" style="margin-bottom: 20px;">预约电动车</h4>
+                    
+                    <div class="form-group">
+                        <label class="form-label">出发地</label>
+                        <input type="text" class="form-control" id="departure" placeholder="请输入出发地址">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">目的地</label>
+                        <input type="text" class="form-control" id="destination" placeholder="请输入目的地址">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">用车时间</label>
+                        <input type="datetime-local" class="form-control" id="carTime">
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-secondary" id="backToCarOptions">
+                            <i class="fas fa-arrow-left"></i> 返回
+                        </button>
+                        <button class="btn btn-primary" id="submitBooking">
+                            <i class="fas fa-check"></i> 确认预约
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="success-message" id="carSuccessMessage">
+                    <div class="success-icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <h3 class="success-title">预约成功！</h3>
+                    <p class="success-desc" id="carSuccessDetails">您的用车预约已保存</p>
+                    <button class="btn btn-primary" id="closeCarSuccess">
+                        <i class="fas fa-home"></i> 返回首页
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 删除确认弹窗 -->
+    <div class="confirm-modal" id="deleteConfirmModal">
+        <div class="confirm-content">
+            <div class="confirm-icon">
+                <i class="fas fa-trash"></i>
+            </div>
+            <h3 class="confirm-title">确认删除</h3>
+            <p class="confirm-message">你确定要删除这条记录？</p>
+            <div class="confirm-buttons">
+                <button class="btn btn-cancel" id="cancelDelete">
+                    取消
+                </button>
+                <button class="btn btn-confirm" id="confirmDelete">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>© 2023 郗镜霏智能生活服务中心(邯郸版) | 一站式生活服务解决方案</p>
+            <p class="app-version">版本 2.1.0</p>
+        </div>
+    </footer>
+    
+    <script>
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取DOM元素
+            const foodServiceCard = document.getElementById('foodService');
+            const carServiceCard = document.getElementById('carService');
+            const orderFoodBtn = document.getElementById('orderFoodBtn');
+            const bookCarBtn = document.getElementById('bookCarBtn');
+            const foodModal = document.getElementById('foodModal');
+            const carModal = document.getElementById('carModal');
+            const closeFoodModal = document.getElementById('closeFoodModal');
+            const closeCarModal = document.getElementById('closeCarModal');
+            const cookAtHomeOption = document.getElementById('cookAtHomeOption');
+            const eatOutOption = document.getElementById('eatOutOption');
+            const cookAtHomeForm = document.getElementById('cookAtHomeForm');
+            const eatOutForm = document.getElementById('eatOutForm');
+            const electricOption = document.getElementById('electricOption');
+            const carOption = document.getElementById('carOption');
+            const bookingForm = document.getElementById('bookingForm');
+            const bookingTitle = document.getElementById('bookingTitle');
+            const submitBooking = document.getElementById('submitBooking');
+            const foodSuccessMessage = document.getElementById('foodSuccessMessage');
+            const carSuccessMessage = document.getElementById('carSuccessMessage');
+            const backToFoodOptions = document.getElementById('backToFoodOptions');
+            const backToFoodOptions2 = document.getElementById('backToFoodOptions2');
+            const backToCarOptions = document.getElementById('backToCarOptions');
+            const submitCookOrder = document.getElementById('submitCookOrder');
+            const submitEatOutOrder = document.getElementById('submitEatOutOrder');
+            const closeFoodSuccess = document.getElementById('closeFoodSuccess');
+            const closeCarSuccess = document.getElementById('closeCarSuccess');
+            const cookRecipeSelect = document.getElementById('cookRecipeSelect');
+            const customRecipeGroup = document.getElementById('customRecipeGroup');
+            const customRecipe = document.getElementById('customRecipe');
+            const restaurantSelect = document.getElementById('restaurantSelect');
+            const customRestaurantGroup = document.getElementById('customRestaurantGroup');
+            const customRestaurant = document.getElementById('customRestaurant');
+            const transportationInput = document.getElementById('transportation');
+            const foodReservationsContainer = document.getElementById('foodReservationsContainer');
+            const carReservationsContainer = document.getElementById('carReservationsContainer');
+            const noFoodReservations = document.getElementById('noFoodReservations');
+            const noCarReservations = document.getElementById('noCarReservations');
+            
+            // 删除确认弹窗相关元素
+            const deleteConfirmModal = document.getElementById('deleteConfirmModal');
+            const cancelDeleteBtn = document.getElementById('cancelDelete');
+            const confirmDeleteBtn = document.getElementById('confirmDelete');
+            
+            // 设置默认时间（当前时间+1小时）
+            const now = new Date();
+            now.setHours(now.getHours() + 1);
+            const carTimeInput = document.getElementById('carTime');
+            const cookTimeInput = document.getElementById('cookTime');
+            const eatOutTimeInput = document.getElementById('eatOutTime');
+            
+            carTimeInput.value = now.toISOString().slice(0, 16);
+            cookTimeInput.value = now.toISOString().slice(0, 16);
+            eatOutTimeInput.value = now.toISOString().slice(0, 16);
+            
+            // 从localStorage加载预约记录
+            loadFoodReservations();
+            loadCarReservations();
+            
+            // 点菜服务卡片点击事件
+            foodServiceCard.addEventListener('click', () => {
+                showFoodModal();
+            });
+            
+            orderFoodBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                showFoodModal();
+            });
+            
+            // 用车服务卡片点击事件
+            carServiceCard.addEventListener('click', () => {
+                showCarModal();
+            });
+            
+            bookCarBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                showCarModal();
+            });
+            
+            // 关闭模态框
+            closeFoodModal.addEventListener('click', () => {
+                foodModal.style.display = 'none';
+                resetFoodModal();
+            });
+            
+            closeCarModal.addEventListener('click', () => {
+                carModal.style.display = 'none';
+                resetCarModal();
+            });
+            
+            // 点菜选项点击事件
+            cookAtHomeOption.addEventListener('click', () => {
+                cookAtHomeOption.classList.add('active');
+                eatOutOption.classList.remove('active');
+                cookAtHomeForm.style.display = 'block';
+                eatOutForm.style.display = 'none';
+            });
+            
+            eatOutOption.addEventListener('click', () => {
+                eatOutOption.classList.add('active');
+                cookAtHomeOption.classList.remove('active');
+                eatOutForm.style.display = 'block';
+                cookAtHomeForm.style.display = 'none';
+            });
+            
+            // 用车选项点击事件
+            electricOption.addEventListener('click', () => {
+                electricOption.classList.add('active');
+                carOption.classList.remove('active');
+                bookingTitle.textContent = '预约电动车';
+                bookingForm.style.display = 'block';
+            });
+            
+            carOption.addEventListener('click', () => {
+                carOption.classList.add('active');
+                electricOption.classList.remove('active');
+                bookingTitle.textContent = '预约汽车';
+                bookingForm.style.display = 'block';
+            });
+            
+            // 自定义菜谱选择
+            cookRecipeSelect.addEventListener('change', function() {
+                if (this.value === 'custom') {
+                    customRecipeGroup.style.display = 'block';
+                    customRecipe.required = true;
+                } else {
+                    customRecipeGroup.style.display = 'none';
+                    customRecipe.required = false;
+                }
+            });
+            
+            // 自定义餐厅选择
+            restaurantSelect.addEventListener('change', function() {
+                if (this.value === 'custom') {
+                    customRestaurantGroup.style.display = 'block';
+                    customRestaurant.required = true;
+                } else {
+                    customRestaurantGroup.style.display = 'none';
+                    customRestaurant.required = false;
+                }
+            });
+            
+            // 返回按钮事件
+            backToFoodOptions.addEventListener('click', resetFoodModal);
+            backToFoodOptions2.addEventListener('click', resetFoodModal);
+            backToCarOptions.addEventListener('click', resetCarModal);
+            
+            // 提交自己做饭订单
+            submitCookOrder.addEventListener('click', () => {
+                const recipe = cookRecipeSelect.value === 'custom' ? customRecipe.value : cookRecipeSelect.value;
+                const time = cookTimeInput.value;
+                
+                if (!recipe || !time) {
+                    alert('请填写完整的信息');
+                    return;
+                }
+                
+                // 创建点菜记录对象
+                const foodReservation = {
+                    id: Date.now(),
+                    type: 'cook',
+                    recipe: recipe,
+                    time: time,
+                    date: new Date().toLocaleDateString('zh-CN')
+                };
+                
+                // 保存到localStorage
+                saveFoodReservation(foodReservation);
+                
+                // 显示成功消息
+                cookAtHomeForm.style.display = 'none';
+                foodSuccessMessage.style.display = 'block';
+            });
+            
+            // 提交外出就餐订单
+            submitEatOutOrder.addEventListener('click', () => {
+                const restaurant = restaurantSelect.value === 'custom' ? customRestaurant.value : restaurantSelect.value;
+                const transportation = transportationInput.value;
+                const time = eatOutTimeInput.value;
+                
+                if (!restaurant || !transportation || !time) {
+                    alert('请填写完整的信息');
+                    return;
+                }
+                
+                // 创建点菜记录对象
+                const foodReservation = {
+                    id: Date.now(),
+                    type: 'eatout',
+                    restaurant: restaurant,
+                    transportation: transportation,
+                    time: time,
+                    date: new Date().toLocaleDateString('zh-CN')
+                };
+                
+                // 保存到localStorage
+                saveFoodReservation(foodReservation);
+                
+                // 显示成功消息
+                eatOutForm.style.display = 'none';
+                foodSuccessMessage.style.display = 'block';
+            });
+            
+            // 提交用车预约
+            submitBooking.addEventListener('click', () => {
+                const departure = document.getElementById('departure').value;
+                const destination = document.getElementById('destination').value;
+                const carTime = document.getElementById('carTime').value;
+                const vehicleType = electricOption.classList.contains('active') ? '电动车' : '汽车';
+                
+                if (!departure || !destination || !carTime) {
+                    alert('请填写完整的预约信息');
+                    return;
+                }
+                
+                // 创建预约对象
+                const reservation = {
+                    id: Date.now(),
+                    vehicleType: vehicleType,
+                    departure: departure,
+                    destination: destination,
+                    time: carTime,
+                    date: new Date().toLocaleDateString('zh-CN')
+                };
+                
+                // 保存到localStorage
+                saveCarReservation(reservation);
+                
+                // 显示成功消息
+                const carSuccessDetails = document.getElementById('carSuccessDetails');
+                carSuccessDetails.innerHTML = `您的${vehicleType}预约已提交<br>出发地: ${departure}<br>目的地: ${destination}`;
+                
+                bookingForm.style.display = 'none';
+                carSuccessMessage.style.display = 'block';
+            });
+            
+            // 关闭成功消息
+            closeFoodSuccess.addEventListener('click', () => {
+                foodModal.style.display = 'none';
+                resetFoodModal();
+            });
+            
+            closeCarSuccess.addEventListener('click', () => {
+                carModal.style.display = 'none';
+                resetCarModal();
+            });
+            
+            // 点击模态框外部关闭
+            window.addEventListener('click', (e) => {
+                if (e.target === foodModal) {
+                    foodModal.style.display = 'none';
+                    resetFoodModal();
+                }
+                if (e.target === carModal) {
+                    carModal.style.display = 'none';
+                    resetCarModal();
+                }
+                if (e.target === deleteConfirmModal) {
+                    deleteConfirmModal.style.display = 'none';
+                }
+            });
+            
+            // 删除记录相关变量
+            let recordToDelete = { id: null, type: null };
+            
+            // 设置删除按钮点击事件（使用事件委托）
+            document.addEventListener('click', function(e) {
+                // 检查点击的是否是删除按钮
+                if (e.target.closest('.delete-btn')) {
+                    const deleteBtn = e.target.closest('.delete-btn');
+                    const id = parseInt(deleteBtn.getAttribute('data-id'));
+                    const type = deleteBtn.getAttribute('data-type');
+                    
+                    // 保存要删除的记录信息
+                    recordToDelete = { id, type };
+                    
+                    // 显示确认弹窗
+                    deleteConfirmModal.style.display = 'flex';
+                }
+            });
+            
+            // 取消删除
+            cancelDeleteBtn.addEventListener('click', function() {
+                deleteConfirmModal.style.display = 'none';
+                recordToDelete = { id: null, type: null };
+            });
+            
+            // 确认删除
+            confirmDeleteBtn.addEventListener('click', function() {
+                if (recordToDelete.id && recordToDelete.type) {
+                    deleteReservation(recordToDelete.id, recordToDelete.type);
+                    deleteConfirmModal.style.display = 'none';
+                    recordToDelete = { id: null, type: null };
+                }
+            });
+            
+            // 显示点菜模态框
+            function showFoodModal() {
+                foodModal.style.display = 'flex';
+            }
+            
+            // 显示用车模态框
+            function showCarModal() {
+                carModal.style.display = 'flex';
+            }
+            
+            // 重置点菜模态框
+            function resetFoodModal() {
+                cookAtHomeOption.classList.remove('active');
+                eatOutOption.classList.remove('active');
+                cookAtHomeForm.style.display = 'none';
+                eatOutForm.style.display = 'none';
+                foodSuccessMessage.style.display = 'none';
+                cookRecipeSelect.value = '';
+                customRecipeGroup.style.display = 'none';
+                customRecipe.value = '';
+                restaurantSelect.value = '';
+                customRestaurantGroup.style.display = 'none';
+                customRestaurant.value = '';
+                transportationInput.value = '';
+                
+                // 重置时间为当前时间+1小时
+                const now = new Date();
+                now.setHours(now.getHours() + 1);
+                cookTimeInput.value = now.toISOString().slice(0, 16);
+                eatOutTimeInput.value = now.toISOString().slice(0, 16);
+            }
+            
+            // 重置用车模态框
+            function resetCarModal() {
+                electricOption.classList.remove('active');
+                carOption.classList.remove('active');
+                bookingForm.style.display = 'none';
+                carSuccessMessage.style.display = 'none';
+                // 清空表单
+                document.getElementById('departure').value = '';
+                document.getElementById('destination').value = '';
+                
+                // 重置时间为当前时间+1小时
+                const now = new Date();
+                now.setHours(now.getHours() + 1);
+                document.getElementById('carTime').value = now.toISOString().slice(0, 16);
+            }
+            
+            // 保存点菜记录到localStorage
+            function saveFoodReservation(reservation) {
+                let reservations = JSON.parse(localStorage.getItem('foodReservations')) || [];
+                reservations.unshift(reservation); // 添加到数组开头
+                localStorage.setItem('foodReservations', JSON.stringify(reservations));
+                
+                // 更新点菜记录显示
+                loadFoodReservations();
+            }
+            
+            // 保存用车预约到localStorage
+            function saveCarReservation(reservation) {
+                let reservations = JSON.parse(localStorage.getItem('carReservations')) || [];
+                reservations.unshift(reservation); // 添加到数组开头
+                localStorage.setItem('carReservations', JSON.stringify(reservations));
+                
+                // 更新用车预约列表显示
+                loadCarReservations();
+            }
+            
+            // 从localStorage加载点菜记录
+            function loadFoodReservations() {
+                const reservations = JSON.parse(localStorage.getItem('foodReservations')) || [];
+                foodReservationsContainer.innerHTML = '';
+                
+                if (reservations.length === 0) {
+                    foodReservationsContainer.appendChild(noFoodReservations);
+                    noFoodReservations.style.display = 'block';
+                    return;
+                }
+                
+                noFoodReservations.style.display = 'none';
+                
+                reservations.forEach(reservation => {
+                    const reservationCard = document.createElement('div');
+                    reservationCard.className = 'reservation-card food-reservation';
+                    
+                    const dateTime = new Date(reservation.time);
+                    const formattedTime = dateTime.toLocaleString('zh-CN', {
+                        month: 'short',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    
+                    let content = '';
+                    
+                    if (reservation.type === 'cook') {
+                        content = `
+                            <div class="reservation-header">
+                                <span class="reservation-type food-type">
+                                    <i class="fas fa-utensil-spoon"></i> 自己做菜
+                                </span>
+                                <span class="reservation-time">${formattedTime}</span>
+                            </div>
+                            <div class="reservation-details">
+                                <div class="route">
+                                    <i class="fas fa-utensils"></i>
+                                    <span class="location">${reservation.recipe}</span>
+                                </div>
+                                <div style="font-size: 0.9rem; color: var(--gray); margin-top: 5px;">
+                                    预计用餐时间
+                                </div>
+                            </div>
+                            <button class="delete-btn" data-id="${reservation.id}" data-type="food">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        `;
+                    } else if (reservation.type === 'eatout') {
+                        content = `
+                            <div class="reservation-header">
+                                <span class="reservation-type food-type">
+                                    <i class="fas fa-store"></i> 外出就餐
+                                </span>
+                                <span class="reservation-time">${formattedTime}</span>
+                            </div>
+                            <div class="reservation-details">
+                                <div class="route">
+                                    <i class="fas fa-store"></i>
+                                    <span class="location">${reservation.restaurant}</span>
+                                </div>
+                                <div style="font-size: 0.9rem; color: var(--gray); margin-top: 5px;">
+                                    出行方式: ${reservation.transportation}
+                                </div>
+                            </div>
+                            <button class="delete-btn" data-id="${reservation.id}" data-type="food">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        `;
+                    }
+                    
+                    reservationCard.innerHTML = content;
+                    foodReservationsContainer.appendChild(reservationCard);
+                });
+            }
+            
+            // 从localStorage加载用车预约记录
+            function loadCarReservations() {
+                const reservations = JSON.parse(localStorage.getItem('carReservations')) || [];
+                carReservationsContainer.innerHTML = '';
+                
+                if (reservations.length === 0) {
+                    carReservationsContainer.appendChild(noCarReservations);
+                    noCarReservations.style.display = 'block';
+                    return;
+                }
+                
+                noCarReservations.style.display = 'none';
+                
+                reservations.forEach(reservation => {
+                    const reservationCard = document.createElement('div');
+                    reservationCard.className = 'reservation-card car-reservation';
+                    
+                    const dateTime = new Date(reservation.time);
+                    const formattedTime = dateTime.toLocaleString('zh-CN', {
+                        month: 'short',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    
+                    reservationCard.innerHTML = `
+                        <div class="reservation-header">
+                            <span class="vehicle-type ${reservation.vehicleType === '电动车' ? 'vehicle-electric' : 'vehicle-car'}">
+                                <i class="fas ${reservation.vehicleType === '电动车' ? 'fa-bicycle' : 'fa-car'}"></i> ${reservation.vehicleType}
+                            </span>
+                            <span class="reservation-time">${formattedTime}</span>
+                        </div>
+                        <div class="reservation-details">
+                            <div class="route">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span class="location">${reservation.departure}</span>
+                            </div>
+                            <div style="text-align: center; margin: 5px 0;">
+                                <i class="fas fa-arrow-down" style="color: var(--gray);"></i>
+                            </div>
+                            <div class="route">
+                                <i class="fas fa-flag-checkered"></i>
+                                <span class="location">${reservation.destination}</span>
+                            </div>
+                        </div>
+                        <button class="delete-btn" data-id="${reservation.id}" data-type="car">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    `;
+                    
+                    carReservationsContainer.appendChild(reservationCard);
+                });
+            }
+            
+            // 删除记录函数
+            function deleteReservation(id, type) {
+                if (type === 'food') {
+                    let reservations = JSON.parse(localStorage.getItem('foodReservations')) || [];
+                    reservations = reservations.filter(reservation => reservation.id !== id);
+                    localStorage.setItem('foodReservations', JSON.stringify(reservations));
+                    loadFoodReservations();
+                } else if (type === 'car') {
+                    let reservations = JSON.parse(localStorage.getItem('carReservations')) || [];
+                    reservations = reservations.filter(reservation => reservation.id !== id);
+                    localStorage.setItem('carReservations', JSON.stringify(reservations));
+                    loadCarReservations();
+                }
+            }
+            
+            // 添加一些初始预约数据（演示用）
+            if (!localStorage.getItem('foodReservations')) {
+                const demoFoodReservations = [
+                    {
+                        id: 1,
+                        type: 'cook',
+                        recipe: '火鸡面',
+                        time: new Date(Date.now() + 86400000).toISOString(), // 明天
+                        date: new Date().toLocaleDateString('zh-CN')
+                    },
+                    {
+                        id: 2,
+                        type: 'eatout',
+                        restaurant: '海底捞',
+                        transportation: '打车',
+                        time: new Date(Date.now() + 172800000).toISOString(), // 后天
+                        date: new Date().toLocaleDateString('zh-CN')
+                    }
+                ];
+                localStorage.setItem('foodReservations', JSON.stringify(demoFoodReservations));
+                loadFoodReservations();
+            }
+            
+            if (!localStorage.getItem('carReservations')) {
+                const demoCarReservations = [
+                    {
+                        id: 1,
+                        vehicleType: '电动车',
+                        departure: '科技园区A座',
+                        destination: '市中心购物广场',
+                        time: new Date(Date.now() + 86400000).toISOString(), // 明天
+                        date: new Date().toLocaleDateString('zh-CN')
+                    },
+                    {
+                        id: 2,
+                        vehicleType: '汽车',
+                        departure: '家',
+                        destination: '机场',
+                        time: new Date(Date.now() + 172800000).toISOString(), // 后天
+                        date: new Date().toLocaleDateString('zh-CN')
+                    },
+                    {
+                        id: 3,
+                        vehicleType: '电动车',
+                        departure: '电影院',
+                        destination: '餐厅',
+                        time: new Date(Date.now() + 259200000).toISOString(), // 3天后
+                        date: new Date().toLocaleDateString('zh-CN')
+                    }
+                ];
+                localStorage.setItem('carReservations', JSON.stringify(demoCarReservations));
+                loadCarReservations();
+            }
+        });
+    </script>
+</body>
+</html>
